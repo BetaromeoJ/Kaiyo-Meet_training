@@ -154,6 +154,15 @@
   .role-table tbody tr { border-top: 1px solid #ececf0; }
   .role-table tbody tr:hover { background: #f8f9ff; }
   .flow-arrow { display:flex; justify-content:center; color:#c7d2fe; font-size:1.5rem; margin: 0.25rem 0; }
+  .video-frame {
+    position: relative; width: 100%; padding-top: 56.25%;
+    background: #f3f4f8; border-radius: 1rem; overflow: hidden; border: 1px solid #e7e9f5;
+  }
+  .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .video-placeholder {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    color: #9aa0b4; font-size: 0.95rem; font-weight: 700; text-align: center; padding: 1rem;
+  }
   .chip-item {
     background: #ffffff;
     border: 1.5px solid #d7dcf5;
@@ -221,6 +230,7 @@
     <ul class="mb-8 space-y-2 text-sm">
       <li><a href="#schedule" class="block py-1">研修プログラムの流れ</a></li>
       <li><a href="#message" class="block py-1">中心メッセージ</a></li>
+      <li><a href="#video" class="block py-1">復習動画</a></li>
     </ul>
   </nav>
   <div id="overlay" class="fixed inset-0 bg-black/30 z-40 hidden"></div>
@@ -691,6 +701,19 @@
       <div class="caution-card">
         <span class="material-symbols-outlined" aria-hidden="true">warning</span>
         <p>録音した授業音声や生成した授業記録には、生徒の氏名や発言内容が含まれます。Geminiへアップロードする際は、県域教育アカウントの利用範囲・保存先を確認し、不要になった録音データは速やかに削除してください。生成された授業記録は、必ず教師が内容を確認したうえで共有してください。</p>
+      </div>
+    </section>
+
+    <!-- ===== 復習動画 ===== -->
+    <section id="video" class="mb-16">
+      <p class="badge inline-block text-xs font-bold text-blue-600 bg-white border border-gray-200 px-5 py-2 rounded-full mb-6 uppercase">Video</p>
+      <h2 class="text-2xl font-extrabold mb-6 tracking-tight">復習動画</h2>
+      <p class="text-gray-600 leading-relaxed mb-6">Googleスライドを Google Vids で動画化した、研修の復習用コンテンツです。</p>
+      <div class="video-frame">
+        <div class="video-placeholder">【復習動画：後日公開】</div>
+        <!-- 動画公開時は以下のiframeのコメントを外し、src を差し替えてください
+        <iframe src="" title="復習動画" allowfullscreen></iframe>
+        -->
       </div>
     </section>
 
