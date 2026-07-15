@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Meetで実現する「学びの保障」| 開陽高校定時制課程 研修会</title>
+<meta name="description" content="開陽高校定時制課程「学びの保障」Google Meet研修会。Meetで授業を届け、録音とAIで学びを残す一連の流れを学ぶ50分研修のご案内。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { ink: '#111114' }
+      }
+    }
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  body {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    background: linear-gradient(160deg, #ffffff 0%, #ffffff 45%, #eceffb 100%);
+    font-size: 16px;
+    color: #111114;
+  }
+  .badge { letter-spacing: 0.08em; }
+  .hero-title { letter-spacing: -0.02em; line-height: 0.95; }
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal; font-style: normal;
+    font-size: 20px; line-height: 1;
+  }
+  .grad-pill { background: linear-gradient(90deg, #eef2ff 0%, #f3eafe 100%); }
+  .hidden-theme { background: linear-gradient(90deg, #eef2ff 0%, #f3eafe 100%); }
+  .avatar {
+    width: 96px; height: 96px; border-radius: 9999px;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 2.5rem; background:#f3f4f8;
+  }
+  .bg-number {
+    position: absolute; top: 0.5rem; right: 0;
+    font-size: 7rem; font-weight: 800; color: #eef0f8;
+    line-height: 1; z-index: -1; user-select: none;
+  }
+  .step-num {
+    font-size: 2.25rem; font-weight: 800;
+    background: linear-gradient(90deg,#4f6df5,#7c5cf0);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .drawer { transition: transform .35s ease; }
+  a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 3px solid #4f6df5; outline-offset: 2px; border-radius: 6px;
+  }
+  section[id], h1[id], h2[id], h3[id] { scroll-margin-top: 96px; }
+  .flow-item, .card-hover {
+    transition: background .25s ease, border-color .25s ease,
+                transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease;
+  }
+  .flow-item:hover, .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 32px -14px rgba(79,109,245,0.28);
+    border-color: #c7d2fe;
+  }
+  .flow-item:hover { background: #f8f9ff; border-radius: 1rem; }
+  .flow-item { border-top: 1px solid #ececf0; }
+  .splash-overlay {
+    position: fixed; inset: 0; z-index: 9999; background: #0a0a0c;
+    display: flex; align-items: center; justify-content: center;
+    transform: translateY(0); transition: transform .5s cubic-bezier(.65,0,.35,1);
+  }
+  .splash-overlay.hide { transform: translateY(-100%); pointer-events: none; }
+  .splash-text {
+    color: #ffffff; font-weight: 800; font-size: 1.75rem; letter-spacing: 0.05em;
+    text-align: center; opacity: 0; transform: translateY(28px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .splash-overlay.show .splash-text { opacity: 1; transform: translateY(0); }
+  .splash-sub {
+    display: block; margin-top: .5rem; font-size: .75rem; font-weight: 500;
+    color: #9aa0b4; letter-spacing: 0.15em;
+  }
+  .btn-tap { transition: transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .22s ease; will-change: transform; }
+  .btn-tap:hover { transform: translateY(-3px); box-shadow: 0 10px 20px -8px rgba(79,109,245,0.3); }
+  .btn-tap.lift { transform: translateY(-7px) scale(1.035); box-shadow: 0 16px 28px -8px rgba(79,109,245,0.4); }
+  .quicknav { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .quicknav-btn {
+    display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px;
+    padding: 0.55rem 1.1rem; border-radius: 9999px; background: #ffffff;
+    border: 1.5px solid #c7d2fe; color: #3346c9; font-weight: 700; font-size: 0.9rem;
+    transition: background .2s ease, transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease;
+    white-space: nowrap;
+  }
+  .quicknav-btn:hover {
+    background: linear-gradient(90deg, #eef2ff 0%, #f3eafe 100%);
+    transform: translateY(-2px); box-shadow: 0 8px 16px -8px rgba(79,109,245,0.35);
+  }
+  .quicknav-btn .material-symbols-outlined { font-size: 18px; }
+  .caution-card {
+    background: #fff8e6; border: 1px solid #f3d98b; border-radius: 1rem;
+    padding: 1.25rem 1.5rem; display: flex; gap: 0.9rem; align-items: flex-start;
+  }
+  .caution-card .material-symbols-outlined { color: #b5860b; font-size: 26px; flex-shrink: 0; }
+  .caution-card p { font-size: 0.95rem; line-height: 1.7; color: #6b5518; }
+  .prompt-card { background: #ffffff; border: 1px solid #e7e9f5; border-radius: 1rem; padding: 1.5rem; }
+  .prompt-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; }
+  .prompt-card h4 { font-weight: 800; font-size: 1.05rem; }
+  .prompt-card .prompt-scene { font-size: 0.85rem; color: #6b7280; margin-top: 0.2rem; }
+  .prompt-body {
+    background: #f7f8fc; border-radius: 0.75rem; padding: 1rem; font-size: 0.9rem;
+    line-height: 1.8; white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere;
+    color: #2a2d38; max-width: 100%; overflow-x: auto;
+  }
+  .copy-btn {
+    flex-shrink: 0; display: inline-flex; align-items: center; gap: 0.35rem;
+    min-height: 44px; min-width: 44px; padding: 0.5rem 1rem; border-radius: 9999px;
+    background: #111114; color: #ffffff; font-weight: 700; font-size: 0.85rem;
+    border: none; cursor: pointer;
+    transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease, background .2s ease;
+  }
+  .copy-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 18px -8px rgba(17,17,20,0.35); }
+  .copy-btn.copied { background: #1b8a5a; }
+  .accordion { border: 1px solid #e7e9f5; border-radius: 1rem; overflow: hidden; }
+  .accordion-item + .accordion-item { border-top: 1px solid #e7e9f5; }
+  .accordion-trigger {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.25rem; background: #ffffff; font-weight: 700; font-size: 0.95rem;
+    text-align: left; min-height: 44px; border: none; cursor: pointer;
+  }
+  .accordion-trigger .material-symbols-outlined { transition: transform .2s ease; }
+  .accordion-trigger[aria-expanded="true"] .material-symbols-outlined { transform: rotate(180deg); }
+  .accordion-panel { display: none; padding: 0 1.25rem 1.25rem; font-size: 0.9rem; color: #4b5563; line-height: 1.75; }
+  .accordion-panel.open { display: block; }
+  .resource-card { background: #ffffff; border: 1px solid #e7e9f5; border-radius: 1.25rem; padding: 1.75rem; text-align: left; }
+  .resource-card .material-symbols-outlined { font-size: 28px; color: #4f6df5; margin-bottom: 0.75rem; }
+  .resource-card h3 { font-weight: 800; margin-bottom: 0.4rem; }
+  .resource-card p { font-size: 0.85rem; color: #6b7280; margin-bottom: 1rem; line-height: 1.6; }
+  .sched-table { width: 100%; border-collapse: collapse; }
+  .sched-table th, .sched-table td { text-align: left; padding: 0.9rem 1rem; font-size: 0.9rem; }
+  .sched-table thead th {
+    background: #f7f8fc; color: #6b7280; font-weight: 700; font-size: 0.75rem;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .sched-table tbody tr { border-top: 1px solid #ececf0; }
+  .sched-table tbody tr:hover { background: #f8f9ff; }
+  .sched-time { font-weight: 800; color: #4f6df5; white-space: nowrap; }
+  .role-table { width: 100%; border-collapse: collapse; }
+  .role-table th, .role-table td { text-align: left; padding: 0.9rem 1rem; font-size: 0.9rem; }
+  .role-table thead th {
+    background: #f7f8fc; color: #6b7280; font-weight: 700; font-size: 0.75rem;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .role-table tbody tr { border-top: 1px solid #ececf0; }
+  .role-table tbody tr:hover { background: #f8f9ff; }
+  .flow-arrow { display:flex; justify-content:center; color:#c7d2fe; font-size:1.5rem; margin: 0.25rem 0; }
+  @media print {
+    #splash, #menuBtn, #drawer, #overlay, .quicknav, .copy-btn { display: none !important; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body id="top" class="text-ink antialiased">
+
+  <!-- ===== スプラッシュ演出 ===== -->
+  <div id="splash" class="splash-overlay">
+    <div class="splash-text">開陽定時 Google Meet研修会<span class="splash-sub">MEETで授業を届け、録音とAIで学びを残す</span></div>
+  </div>
+
+  <div id="copy-announcer" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);"></div>
+
+  <!-- ===== メニュー/ドロワー ===== -->
+  <button id="menuBtn" aria-label="メニューを開く" aria-expanded="false" aria-controls="drawer" class="fixed top-6 right-6 z-40 w-12 h-12 rounded-full bg-white shadow-md flex flex-col items-center justify-center gap-1.5">
+    <span class="block w-5 h-0.5 bg-ink"></span>
+    <span class="block w-5 h-0.5 bg-ink"></span>
+    <span class="block w-5 h-0.5 bg-ink"></span>
+  </button>
+
+  <nav id="drawer" class="drawer fixed top-0 right-0 h-full w-80 bg-white z-50 shadow-2xl translate-x-full px-8 py-8 overflow-y-auto" aria-label="ページ内メニュー">
+    <button id="closeBtn" aria-label="メニューを閉じる" class="mb-6 text-2xl leading-none">&times;</button>
+
+    <h3 class="text-xs font-bold text-gray-400 uppercase mb-3">研修の考え方</h3>
+    <ul class="mb-8 space-y-2 text-sm">
+      <li><a href="#policy" class="block py-1">基本方針</a></li>
+      <li><a href="#purpose" class="block py-1">研修の目的</a></li>
+      <li><a href="#goals" class="block py-1">到達目標</a></li>
+      <li><a href="#flow" class="block py-1">研修全体の流れ</a></li>
+    </ul>
+
+    <h3 class="text-xs font-bold text-gray-400 uppercase mb-3">授業の届け方</h3>
+    <ul class="mb-8 space-y-2 text-sm">
+      <li><a href="#equipment" class="block py-1">使用する機器・サービス</a></li>
+      <li><a href="#hybrid" class="block py-1">ハイブリッド授業の構成</a></li>
+      <li><a href="#material" class="block py-1">教材提示の考え方</a></li>
+    </ul>
+
+    <h3 class="text-xs font-bold text-gray-400 uppercase mb-3">録音とAI活用</h3>
+    <ul class="mb-8 space-y-2 text-sm">
+      <li><a href="#recorder" class="block py-1">サウンドレコーダーの役割</a></li>
+      <li><a href="#recording-note" class="block py-1">録音時の注意</a></li>
+      <li><a href="#gemini" class="block py-1">Geminiで授業内容を整理</a></li>
+      <li><a href="#record-image" class="block py-1">授業記録の完成イメージ</a></li>
+      <li><a href="#share" class="block py-1">共有方法</a></li>
+    </ul>
+
+    <h3 class="text-xs font-bold text-gray-400 uppercase mb-3">研修プログラム</h3>
+    <ul class="mb-8 space-y-2 text-sm">
+      <li><a href="#schedule" class="block py-1">50分スケジュール</a></li>
+      <li><a href="#detail" class="block py-1">各時間帯の内容</a></li>
+      <li><a href="#slides" class="block py-1">スライド構成案</a></li>
+      <li><a href="#message" class="block py-1">中心メッセージ</a></li>
+    </ul>
+  </nav>
+  <div id="overlay" class="fixed inset-0 bg-black/30 z-40 hidden"></div>
+
+  <main class="max-w-4xl mx-auto px-6">
+
+    <!-- ===== Hero ===== -->
+    <header class="relative pt-40 pb-16">
+      <p class="badge inline-block text-xs font-bold text-blue-600 bg-white border border-gray-200 px-5 py-2 rounded-full mb-8 uppercase">開陽定時 Google Meet研修会</p>
+      <h1 class="hero-title text-5xl md:text-7xl lg:text-8xl font-extrabold mb-8 tracking-tight">
+        <span class="text-gray-900">Meetで届け、</span><br>
+        <span class="text-gray-600">AIで残す。</span>
+      </h1>
+      <p class="text-gray-700 text-lg md:text-xl font-bold mb-6">Google Meetで実現する「学びの保障」</p>
+      <p class="text-gray-500 leading-relaxed mb-10 max-w-2xl">病気療養、不登校、家庭事情などにより教室で授業を受けることが難しい生徒にも、ICTを活用して学習機会を保障する。Meetで授業を届け、録音とAIで学びを残す一連の流れを、50分間で体験する研修です。</p>
+      <a href="#policy" class="btn-tap inline-block bg-ink text-white rounded-full px-12 py-5 text-lg font-bold hover:bg-gray-800 transition">研修内容を見る</a>
+    </header>
+
+    <!-- ===== 1. 研修の基本方針 ===== -->
+    <section id="policy" class="card-hover bg-white border border-gray-100 rounded-2xl p-8 md:p-10 mb-6 relative">
+      <span class="bg-number" aria-hidden="true">01</span>
+      <h2 class="text-blue-600 text-xl font-bold mb-4">研修の基本方針</h2>
+      <p class="text-gray-600 leading-relaxed mb-6">今回の研修では、Google Meetの多機能な使い方を広く紹介するのではなく、<strong class="text-ink">教室に来られない生徒にも授業を届ける</strong>ことを最優先にします。そのうえで、授業終了後に、Windowsのサウンドレコーダーで記録した授業音声をGeminiで整理し、授業のまとめとして残すところまでを一連の流れとして示します。</p>
+      <div class="hidden-theme rounded-xl p-5">
+        <p class="text-xs font-bold text-gray-400 uppercase mb-2">キーワード</p>
+        <p class="font-bold text-sm">Google Meet / ハイブリッド授業 / サウンドレコーダー / Gemini / 学びの保障</p>
+      </div>
+    </section>
+
+    <!-- クイックナビ -->
+    <nav class="quicknav mb-14" aria-label="ページ内メニュー">
+      <a href="#purpose" class="quicknav-btn"><span class="material-symbols-outlined" aria-hidden="true">flag</span>研修の目的</a>
+      <a href="#recorder" class="quicknav-btn"><span class="material-symbols-outlined" aria-hidden="true">mic</span>録音の手順</a>
+      <a href="#gemini" class="quicknav-btn"><span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span>Geminiで整理</a>
+      <a href="#schedule" class="quicknav-btn"><span class="material-symbols-outlined" aria-hidden="true">schedule</span>50分の流れ</a>
+    </nav>
+
+    <!-- ===== 3. 研修の目的 ===== -->
+    <section id="purpose" class="mb-16">
+      <p class="badge inline-block text-xs font-bold text-blue-600 bg-white border border-gray-200 px-5 py-2 rounded-full mb-6 uppercase">Purpose</p>
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">研修の目的</h2>
+      <p class="text-gray-600 leading-relaxed mb-8">病気療養、不登校、家庭事情などにより、教室で授業を受けることが難しい生徒に対しても、ICTを活用して学習機会を保障する方法を学ぶ。本研修では、次の2つを実現します。</p>
+
+      <div class="grid md:grid-cols-2 gap-5 mb-8">
+        <div class="card-hover bg-white border border-gray-100 rounded-2xl p-7">
+          <span class="badge inline-block text-xs font-bold text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full mb-4 uppercase">① 今の学び</span>
+          <h3 class="text-xl font-bold mb-2">リアルタイムの学びを保障する</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Google Meetを使い、教室で行われている授業を、自宅や別室にいる生徒へ届ける。</p>
+        </div>
+        <div class="card-hover bg-white border border-gray-100 rounded-2xl p-7">
+          <span class="badge inline-block text-xs font-bold text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full mb-4 uppercase">② 後からの学び</span>
+          <h3 class="text-xl font-bold mb-2">後からの学びを保障する</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">授業音声を記録し、Geminiで授業内容を整理して、出席した生徒にも欠席した生徒にも共有できる授業記録を作る。</p>
+        </div>
+      </div>
+
+      <div class="hidden-theme rounded-xl p-5 flex gap-3 items-start">
+        <span class="material-symbols-outlined text-blue-600 mt-0.5" aria-hidden="true">info</span>
+        <p class="text-sm text-gray-700 leading-relaxed">文部科学省の資料でも、ICTを活用し、学校外での学習や、やむを得ず登校できない生徒への配慮を進める考え方が示されています。</p>
+      </div>
+    </section>
+
+    <!-- ===== 4. 到達目標 ===== -->
+    <section id="goals" class="mb-16">
+      <h2 class="text-blue-600 text-xl font-bold mb-6">研修終了時の到達目標</h2>
+      <p class="text-gray-500 text-sm mb-6">受講者が、次の内容を理解・体験できる状態を目指します。</p>
+      <ul class="space-y-3">
+        <li class="flex gap-3"><span class="material-symbols-outlined text-blue-500 mt-0.5" aria-hidden="true">check_circle</span><span class="text-gray-600">Google Meetに参加できる</span></li>
+        <li class="flex gap-3"><span class="material-symbols-outlined text-blue-500 mt-0.5" aria-hidden="true">check_circle</span><span class="text-gray-600">マイクとカメラを操作できる</span></li>
+        <li class="flex gap-3"><span class="material-symbols-outlined text-blue-500 mt-0.5" aria-hidden="true">check_circle</span><span class="text-gray-600">教材を画面共有できる</span></li>
+        <li class="flex gap-3"><span class="material-symbols-outlined text-blue-500 mt-0.5" aria-hidden="true">check_circle</span><span class="text-gray-600">教室と自宅をつなぐ授業の流れを理解できる</span></li>
+        <li class="flex gap-3"><span class="material-symbols-outlined text-blue-500 mt-0.5" aria-hidden="true">check_circle</span><span class="text-gray-600">Windowsのサウンドレコーダーで授業音声を録音できる</span></li>
+        <li class="flex gap-3"><span class="material-symbols-outlined text-blue-500 mt-0.5" aria-hidden="true">check_circle</span><span class="text-gray-600">録音データをGeminiに読み込ませ、授業内容を整理できる</span></li>
+        <li class="flex gap-3"><span class="material-symbols-outlined text-blue-500 mt-0.5" aria-hidden="true">check_circle</span><span class="text-gray-600">生成した授業記録をGoogleドキュメントやClassroomで共有できる</span></li>
+      </ul>
+    </section>
+
+    <!-- ===== 5. 研修全体の流れ ===== -->
+    <section id="flow" class="mb-16">
+      <p class="badge inline-block text-xs font-bold text-blue-600 bg-white border border-gray-200 px-5 py-2 rounded-full mb-6 uppercase">Flow</p>
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">研修全体の流れ</h2>
+      <p class="text-gray-500 mb-8">この流れを、研修の最初から最後まで一貫したストーリーとして提示します。</p>
+      <div class="space-y-0">
+        <div class="flow-item px-4 py-4 rounded-xl"><p class="font-bold text-gray-800">① デジタル教材を準備</p></div>
+        <div class="flow-arrow" aria-hidden="true">&darr;</div>
+        <div class="flow-item px-4 py-4 rounded-xl"><p class="font-bold text-gray-800">② Google Meetを開始</p></div>
+        <div class="flow-arrow" aria-hidden="true">&darr;</div>
+        <div class="flow-item px-4 py-4 rounded-xl"><p class="font-bold text-gray-800">③ 教室と自宅の生徒へ同時に授業</p></div>
+        <div class="flow-arrow" aria-hidden="true">&darr;</div>
+        <div class="flow-item px-4 py-4 rounded-xl"><p class="font-bold text-gray-800">④ サウンドレコーダーで授業音声を録音</p></div>
+        <div class="flow-arrow" aria-hidden="true">&darr;</div>
+        <div class="flow-item px-4 py-4 rounded-xl"><p class="font-bold text-gray-800">⑤ 録音データをGeminiへ</p></div>
+        <div class="flow-arrow" aria-hidden="true">&darr;</div>
+        <div class="flow-item px-4 py-4 rounded-xl"><p class="font-bold text-gray-800">⑥ 文字起こし・授業内容の整理</p></div>
+        <div class="flow-arrow" aria-hidden="true">&darr;</div>
+        <div class="flow-item px-4 py-4 rounded-xl"><p class="font-bold text-gray-800">⑦ Googleドキュメントに保存</p></div>
+        <div class="flow-arrow" aria-hidden="true">&darr;</div>
+        <div class="flow-item px-4 py-4 rounded-xl"><p class="font-bold text-gray-800">⑧ Classroomで共有</p></div>
+      </div>
+    </section>
+
+    <!-- ===== 6. 使用する機器・サービス ===== -->
+    <section id="equipment" class="mb-16">
+      <h2 class="text-blue-600 text-xl font-bold mb-6">使用する機器・サービス</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="font-bold text-lg mb-4">教師側</h3>
+          <ul class="grid grid-cols-2 gap-3">
+            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">学校支給のSurface</li>
+            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Google Meet</li>
+            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Google Classroom</li>
+            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Windowsサウンドレコーダー</li>
+            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">プロジェクター</li>
+            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">タブレット</li>
+            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">三脚</li>
+            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">ピンマイク</li>
+            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">デジタル教材</li>
+            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Gemini</li>
+            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600 col-span-2">Googleドキュメント</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg mb-4">受講者側</h3>
+          <ul class="grid grid-cols-1 gap-3">
+            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">学校支給のSurface</li>
+            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">イヤホンまたはヘッドセット</li>
+            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">県域教育アカウント</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 7. ハイブリッド授業の基本構成 ===== -->
+    <section id="hybrid" class="mb-16">
+      <p class="badge inline-block text-xs font-bold text-blue-600 bg-white border border-gray-200 px-5 py-2 rounded-full mb-6 uppercase">Hybrid Class</p>
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-8 tracking-tight">ハイブリッド授業の基本構成</h2>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div class="card-hover bg-white border border-gray-100 rounded-2xl p-6">
+          <span class="material-symbols-outlined text-blue-500 mb-2 block" aria-hidden="true">groups</span>
+          <h3 class="font-bold mb-1">教室にいる生徒</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Surface上のデジタル教材をプロジェクターで見る。</p>
+        </div>
+        <div class="card-hover bg-white border border-gray-100 rounded-2xl p-6">
+          <span class="material-symbols-outlined text-blue-500 mb-2 block" aria-hidden="true">home</span>
+          <h3 class="font-bold mb-1">オンラインの生徒</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Google Meetの画面共有で、教室と同じ教材を見る。</p>
+        </div>
+        <div class="card-hover bg-white border border-gray-100 rounded-2xl p-6">
+          <span class="material-symbols-outlined text-blue-500 mb-2 block" aria-hidden="true">record_voice_over</span>
+          <h3 class="font-bold mb-1">教師</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">ピンマイクを使用し、教室内を移動しながら説明する。</p>
+        </div>
+        <div class="card-hover bg-white border border-gray-100 rounded-2xl p-6">
+          <span class="material-symbols-outlined text-blue-500 mb-2 block" aria-hidden="true">videocam</span>
+          <h3 class="font-bold mb-1">タブレット</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">三脚に固定し、教師や教室の様子を映す。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 8. 教材提示の考え方 ===== -->
+    <section id="material" class="mb-16">
+      <h2 class="text-blue-600 text-xl font-bold mb-6">教材提示の考え方</h2>
+      <p class="text-gray-600 leading-relaxed mb-6">教材は、可能な限りデジタル化します。教室の生徒とオンラインの生徒が、同じ教材を同時に見られることが重要です。</p>
+
+      <div class="hidden-theme rounded-xl p-6 mb-8">
+        <p class="font-bold text-sm mb-3">デジタル教材</p>
+        <div class="pl-4 space-y-2 text-sm text-gray-700">
+          <p>├─ 教室：プロジェクターで投影</p>
+          <p>└─ 自宅：Meetで画面共有</p>
+        </div>
+      </div>
+
+      <h3 class="font-bold text-lg mb-4">使用する教材の例</h3>
+      <ul class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Googleスライド</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Canvaプレゼンテーション</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">PDF</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Googleドキュメント</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Webサイト</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">デジタル教科書</li>
+      </ul>
+      <p class="text-gray-500 text-sm">※ Canvaのスマートフォンリモコン機能は補助的な情報とし、今回は研修の中心には置きません。</p>
+    </section>
+
+    <!-- ===== 9. サウンドレコーダーの役割 ===== -->
+    <section id="recorder" class="mb-16">
+      <p class="badge inline-block text-xs font-bold text-blue-600 bg-white border border-gray-200 px-5 py-2 rounded-full mb-6 uppercase">Recording</p>
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">Windowsサウンドレコーダーの役割</h2>
+      <p class="text-gray-600 leading-relaxed mb-10">Google Meetの録画やGeminiによるメモ作成が県域教育アカウントでは利用できないため、Windows標準のサウンドレコーダーで授業音声を記録します。</p>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="font-bold text-lg mb-5">授業開始前の流れ</h3>
+          <div class="space-y-5">
+            <div class="flex gap-4"><span class="step-num text-2xl">01</span><p class="text-gray-700 pt-1">ピンマイクをSurfaceに接続</p></div>
+            <div class="flex gap-4"><span class="step-num text-2xl">02</span><p class="text-gray-700 pt-1">サウンドレコーダーを起動</p></div>
+            <div class="flex gap-4"><span class="step-num text-2xl">03</span><p class="text-gray-700 pt-1">録音を開始</p></div>
+            <div class="flex gap-4"><span class="step-num text-2xl">04</span><p class="text-gray-700 pt-1">Google Meetを開始</p></div>
+            <div class="flex gap-4"><span class="step-num text-2xl">05</span><p class="text-gray-700 pt-1">授業を実施</p></div>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg mb-5">授業終了後</h3>
+          <div class="space-y-5">
+            <div class="flex gap-4"><span class="step-num text-2xl">01</span><p class="text-gray-700 pt-1">Meetを終了</p></div>
+            <div class="flex gap-4"><span class="step-num text-2xl">02</span><p class="text-gray-700 pt-1">録音を停止</p></div>
+            <div class="flex gap-4"><span class="step-num text-2xl">03</span><p class="text-gray-700 pt-1">音声ファイルを保存</p></div>
+            <div class="flex gap-4"><span class="step-num text-2xl">04</span><p class="text-gray-700 pt-1">Geminiへアップロード</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 10. 録音時の注意 ===== -->
+    <section id="recording-note" class="mb-16">
+      <h2 class="text-blue-600 text-xl font-bold mb-6">録音時の注意</h2>
+      <p class="text-gray-600 leading-relaxed mb-6">サウンドレコーダーは、基本的にSurfaceに接続されたマイクの音を録音します。そのため、研修では次の点を事前に確認します。</p>
+      <ul class="space-y-3 mb-8">
+        <li class="flex gap-3"><span class="material-symbols-outlined text-blue-500 mt-0.5" aria-hidden="true">radio_button_unchecked</span><span class="text-gray-600">教師の声が明瞭に録音されるか</span></li>
+        <li class="flex gap-3"><span class="material-symbols-outlined text-blue-500 mt-0.5" aria-hidden="true">radio_button_unchecked</span><span class="text-gray-600">Meet参加者の声がスピーカー経由で録音に入るか</span></li>
+        <li class="flex gap-3"><span class="material-symbols-outlined text-blue-500 mt-0.5" aria-hidden="true">radio_button_unchecked</span><span class="text-gray-600">ピンマイクとMeetを同時に使用できるか</span></li>
+        <li class="flex gap-3"><span class="material-symbols-outlined text-blue-500 mt-0.5" aria-hidden="true">radio_button_unchecked</span><span class="text-gray-600">ハウリングや音の反響が起きないか</span></li>
+        <li class="flex gap-3"><span class="material-symbols-outlined text-blue-500 mt-0.5" aria-hidden="true">radio_button_unchecked</span><span class="text-gray-600">保存された音声をGeminiが読み込めるか</span></li>
+      </ul>
+
+      <div class="caution-card">
+        <span class="material-symbols-outlined" aria-hidden="true">warning</span>
+        <p>Meet側の生徒の発言が明瞭に録音されない場合は、教師が質問を復唱します。<br><br>例:「オンライン参加の生徒から、資料3ページについて質問がありました。」<br><br>このように教師が言い直すことで、授業記録にも質問内容を残せます。</p>
+      </div>
+    </section>
+
+    <!-- ===== 11. Geminiで授業内容を整理する ===== -->
+    <section id="gemini" class="mb-16">
+      <p class="badge inline-block text-xs font-bold text-blue-600 bg-white border border-gray-200 px-5 py-2 rounded-full mb-6 uppercase">Gemini</p>
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">Geminiで授業内容を整理する</h2>
+      <p class="text-gray-600 leading-relaxed mb-8">録音した音声ファイルをGeminiにアップロードし、文字起こしと授業記録の作成を依頼します。</p>
+
+      <div class="prompt-card mb-2">
+        <div class="prompt-card-head">
+          <div>
+            <h4>授業記録生成プロンプト</h4>
+            <p class="prompt-scene">録音した授業音声をアップロードした後に入力します。</p>
+          </div>
+          <button class="copy-btn" data-copy-target="#gemini-prompt" aria-label="授業記録生成プロンプトをコピー"><span class="material-symbols-outlined" aria-hidden="true">content_copy</span><span class="copy-label">コピー</span></button>
+        </div>
+        <div id="gemini-prompt" class="prompt-body">以下は高校の授業を録音した音声です。
+
+音声を文字起こししたうえで、
+内容を補いすぎず、次の形式で整理してください。
+
+1. 授業のテーマ
+2. 本時の目標
+3. 授業で説明した内容
+4. 重要なポイント
+5. 生徒から出た質問と回答
+6. 復習すべき内容
+7. 次回までの課題
+
+話し言葉の重複や言い直しを整理し、
+高校生が読みやすい文章にしてください。</div>
+      </div>
+    </section>
+
+    <!-- ===== 12. 授業記録の完成イメージ ===== -->
+    <section id="record-image" class="mb-16">
+      <h2 class="text-blue-600 text-xl font-bold mb-6">授業記録の完成イメージ</h2>
+      <p class="text-gray-600 leading-relaxed mb-6">Geminiが生成した内容を、そのまま配布するのではなく、教師が確認・修正します。</p>
+
+      <div class="card-hover bg-white border border-gray-100 rounded-2xl p-8">
+        <p class="text-xs font-bold text-gray-400 uppercase mb-4">Googleドキュメントの構成例</p>
+        <div class="text-sm text-gray-600 leading-loose mb-6">
+          授業日：　　　　　科目：　　　　　担当者：<br>
+          単元名：　　　　　本時の目標：
+        </div>
+        <ol class="list-decimal list-inside space-y-2 text-sm text-gray-700 mb-6">
+          <li>授業の概要</li>
+          <li>授業で扱った内容</li>
+          <li>重要ポイント</li>
+          <li>生徒からの質問</li>
+          <li>復習事項</li>
+          <li>次回までの課題</li>
+        </ol>
+        <div class="hidden-theme rounded-xl p-5">
+          <p class="text-xs font-bold text-gray-400 uppercase mb-2">ファイル名の例</p>
+          <p class="font-bold text-sm">2026年7月17日_国語_現代文_授業記録</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 13. 共有方法 ===== -->
+    <section id="share" class="mb-16">
+      <p class="badge inline-block text-xs font-bold text-blue-600 bg-white border border-gray-200 px-5 py-2 rounded-full mb-6 uppercase">Share</p>
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">授業記録の共有方法</h2>
+      <p class="text-gray-600 leading-relaxed mb-8">作成したGoogleドキュメントは、Google Classroomで共有します。</p>
+
+      <div class="grid sm:grid-cols-3 gap-5 mb-8">
+        <div class="card-hover bg-white border border-gray-100 rounded-2xl p-6">
+          <h3 class="font-bold mb-1">出席した生徒</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">授業後の復習資料として活用する。</p>
+        </div>
+        <div class="card-hover bg-white border border-gray-100 rounded-2xl p-6">
+          <h3 class="font-bold mb-1">Meetで参加した生徒</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">通信状態が悪く、聞き取れなかった部分を確認する。</p>
+        </div>
+        <div class="card-hover bg-white border border-gray-100 rounded-2xl p-6">
+          <h3 class="font-bold mb-1">授業に参加できなかった生徒</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">授業の概要や重要事項を確認し、学び直す。</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center gap-1 text-sm font-bold text-gray-700">
+        <p>Googleドキュメント</p>
+        <div class="flow-arrow" aria-hidden="true">&darr;</div>
+        <p>Google Classroom</p>
+        <div class="flow-arrow" aria-hidden="true">&darr;</div>
+        <p class="text-center">出席生徒・オンライン生徒・欠席生徒</p>
+      </div>
+    </section>
+
+    <!-- ===== 14. 50分の研修スケジュール ===== -->
+    <section id="schedule" class="mb-16">
+      <p class="badge inline-block text-xs font-bold text-blue-600 bg-white border border-gray-200 px-5 py-2 rounded-full mb-6 uppercase">Schedule</p>
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-8 tracking-tight">50分の研修スケジュール</h2>
+
+      <div class="card-hover bg-white border border-gray-100 rounded-2xl overflow-hidden">
+        <table class="sched-table">
+          <thead>
+            <tr><th>時間</th><th>研修内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="sched-time">0〜5分</td><td class="text-gray-700">「学びの保障」の趣旨と本日のゴール</td></tr>
+            <tr><td class="sched-time">5〜13分</td><td class="text-gray-700">Google Meetの基本操作</td></tr>
+            <tr><td class="sched-time">13〜18分</td><td class="text-gray-700">ハイブリッド授業の機材と配置</td></tr>
+            <tr><td class="sched-time">18〜23分</td><td class="text-gray-700">サウンドレコーダーの起動・録音開始</td></tr>
+            <tr><td class="sched-time">23〜37分</td><td class="text-gray-700">模擬ハイブリッド授業</td></tr>
+            <tr><td class="sched-time">37〜40分</td><td class="text-gray-700">Meet終了・録音停止・音声確認</td></tr>
+            <tr><td class="sched-time">40〜47分</td><td class="text-gray-700">音声をGeminiへアップロードし、授業記録を生成</td></tr>
+            <tr><td class="sched-time">47〜49分</td><td class="text-gray-700">Googleドキュメント・Classroomでの共有例</td></tr>
+            <tr><td class="sched-time">49〜50分</td><td class="text-gray-700">研修全体のまとめ</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== 15. 各時間帯の具体的な内容 ===== -->
+    <section id="detail" class="mb-16">
+      <h2 class="text-blue-600 text-xl font-bold mb-6">各時間帯の具体的な内容</h2>
+      <div class="accordion">
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="true" aria-controls="d1">
+            <span>0〜5分：「学びの保障」と研修目的</span>
+            <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+          </button>
+          <div id="d1" class="accordion-panel open">
+            <p class="mb-2 font-bold text-gray-800">提示するメッセージ:</p>
+            <p>今日の目的は、Google Meetの機能をすべて覚えることではありません。教室に来られない生徒にも、いつもの授業を届けられるようになることです。そのうえで、さらに授業音声を記録として残すことで、後から学び直す機会も保障します。</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="d2">
+            <span>5〜13分：Google Meet基本操作</span>
+            <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+          </button>
+          <div id="d2" class="accordion-panel">
+            <p class="mb-2">扱う機能は最小限にします。</p>
+            <p>ClassroomからMeetに参加 / マイクのオン・オフ / カメラのオン・オフ / チャット / 挙手機能 / 画面共有 / Meetからの退出</p>
+            <p class="mt-2 text-gray-500">細かな設定や高度な機能は扱いません。</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="d3">
+            <span>13〜18分：機材と配置の紹介</span>
+            <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+          </button>
+          <div id="d3" class="accordion-panel">
+            <p class="mb-2">実物を見せながら説明します。黒板・スクリーンの前に教師(ピンマイク装着)、三脚で固定したタブレット、その先に生徒席という配置です。</p>
+            <p class="text-gray-500">ポイントは、機材を増やしすぎないことです。</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="d4">
+            <span>18〜23分：サウンドレコーダーの操作</span>
+            <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+          </button>
+          <div id="d4" class="accordion-panel">
+            <p class="mb-2">Surfaceで実演します。</p>
+            <p>①サウンドレコーダーを開く　②入力マイクを確認する　③ピンマイクで短く話す　④録音を開始する　⑤録音中の画面を確認する　⑥その状態でMeetを始める</p>
+            <p class="mt-2 font-bold text-gray-800">ここで、Meetより先にサウンドレコーダーを起動するという手順を標準化します。</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="d5">
+            <span>23〜37分：模擬ハイブリッド授業</span>
+            <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+          </button>
+          <div id="d5" class="accordion-panel">
+            <p class="mb-2">参加者を2グループに分けます。教室グループは実際の教室で授業を受け、オンライングループは別室からMeetに参加します。</p>
+            <p class="mb-2">模擬授業では次の内容を体験します。デジタル教材の画面共有 / 教師の説明 / オンライン生徒への声かけ / チャットでの応答 / 挙手機能 / オンライン生徒からの質問 / 教師による質問の復唱</p>
+            <p class="text-gray-500">途中でグループを交代する場合は、短時間で行います。</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="d6">
+            <span>37〜40分：録音停止と音声確認</span>
+            <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+          </button>
+          <div id="d6" class="accordion-panel">
+            <p>①Google Meetを終了する　②サウンドレコーダーの録音を停止する　③音声ファイルを再生する　④教師とオンライン参加者の声が入っているか確認する　⑤保存場所を確認する</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="d7">
+            <span>40〜47分：Geminiで授業記録を作成</span>
+            <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+          </button>
+          <div id="d7" class="accordion-panel">
+            <p class="mb-2">①Geminiを開く　②録音データをアップロードする　③用意したプロンプトを入力する　④文字起こしと授業記録を生成する　⑤内容を確認する</p>
+            <p class="text-gray-500">実演では、通信や処理時間に備え、事前に録音した短いサンプル音声も準備します。</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="d8">
+            <span>47〜49分：GoogleドキュメントとClassroomへの共有</span>
+            <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+          </button>
+          <div id="d8" class="accordion-panel">
+            <p class="mb-2">Geminiが生成した内容を、教師が確認 → 必要な修正 → Googleドキュメントへ貼り付け → Classroomに投稿という流れで示します。</p>
+            <p>NotebookLMについては、次の一言に留めます。「この授業記録をNotebookLMのソースにすれば、復習資料や音声解説などに発展させることもできます。」</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="d9">
+            <span>49〜50分：研修のまとめ</span>
+            <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+          </button>
+          <div id="d9" class="accordion-panel">
+            <p class="mb-2 font-bold text-gray-800">最後のスライドには、次の言葉を提示します。</p>
+            <p class="mb-2">「Meetで『今』の授業を届ける。録音とAIで『後から』の学びを残す。」</p>
+            <p>さらに、「まずは、教室に来られない生徒をMeetでつなぐところから始めてください。その授業を音声として残せば、参加できなかった生徒にも、学び直す資料を届けることができます。」と締めます。</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== 16. スライド構成案 ===== -->
+    <section id="slides" class="mb-16">
+      <h2 class="text-blue-600 text-xl font-bold mb-2">スライド構成案</h2>
+      <p class="text-gray-500 text-sm mb-6">50分研修では、20枚前後が適切です。</p>
+      <ol class="grid grid-cols-1 sm:grid-cols-2 gap-3 list-none">
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">01</span>表紙</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">02</span>今日の研修テーマ</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">03</span>「学びの保障」とは</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">04</span>今日のゴール</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">05</span>学びの保障の全体像</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">06</span>Meetでできること</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">07</span>ClassroomからMeetへ参加</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">08</span>Meetの基本操作</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">09</span>画面共有</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">10</span>ハイブリッド授業の構成</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">11</span>使用機材</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">12</span>機材配置</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">13</span>サウンドレコーダーの役割</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">14</span>授業開始前の手順</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">15</span>模擬授業の流れ</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">16</span>録音停止と保存</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">17</span>Geminiへの音声アップロード</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">18</span>授業記録生成プロンプト</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">19</span>Googleドキュメントへの保存</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">20</span>Classroomでの共有</li>
+        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">21</span>研修のまとめ</li>
+      </ol>
+    </section>
+
+    <!-- ===== 17. 中心メッセージ ===== -->
+    <section id="message" class="mb-16">
+      <p class="badge inline-block text-xs font-bold text-blue-600 bg-white border border-gray-200 px-5 py-2 rounded-full mb-6 uppercase">Core Message</p>
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">今回の研修で伝える中心メッセージ</h2>
+      <p class="text-gray-600 leading-relaxed mb-8">この研修の主役は、サウンドレコーダーやGeminiではありません。主役はあくまでも、<strong class="text-ink">教室に来られない生徒の学びを、どう保障するか</strong>という課題です。</p>
+
+      <div class="card-hover bg-white border border-gray-100 rounded-2xl overflow-hidden mb-8">
+        <table class="role-table">
+          <thead><tr><th>ツール</th><th>役割</th></tr></thead>
+          <tbody>
+            <tr><td class="font-bold text-gray-800">Google Meet</td><td class="text-gray-600">リアルタイムで授業を届ける</td></tr>
+            <tr><td class="font-bold text-gray-800">デジタル教材</td><td class="text-gray-600">教室と自宅に同じ教材を提示する</td></tr>
+            <tr><td class="font-bold text-gray-800">サウンドレコーダー</td><td class="text-gray-600">授業音声を記録する</td></tr>
+            <tr><td class="font-bold text-gray-800">Gemini</td><td class="text-gray-600">授業音声を文字起こし・整理する</td></tr>
+            <tr><td class="font-bold text-gray-800">Googleドキュメント</td><td class="text-gray-600">授業記録として保存する</td></tr>
+            <tr><td class="font-bold text-gray-800">Google Classroom</td><td class="text-gray-600">生徒へ配布する</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-gray-500 text-sm mb-4">研修全体を、次の3つの言葉で整理すると、先生方にも伝わりやすくなります。</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="grad-pill inline-flex items-center text-sm font-bold text-blue-600 rounded-full px-5 py-2">つなぐ</span>
+        <span class="grad-pill inline-flex items-center text-sm font-bold text-blue-600 rounded-full px-5 py-2">残す</span>
+        <span class="grad-pill inline-flex items-center text-sm font-bold text-blue-600 rounded-full px-5 py-2">届け直す</span>
+      </div>
+    </section>
+
+    <!-- ===== まとめ(締め) ===== -->
+    <section class="mb-16">
+      <div class="hidden-theme rounded-2xl p-8 md:p-10 text-center">
+        <p class="text-xl md:text-2xl font-extrabold mb-3 leading-relaxed">Meetで「今」の授業を届ける。<br>録音とAIで「後から」の学びを残す。</p>
+        <p class="text-gray-700 leading-relaxed max-w-2xl mx-auto">まずは、教室に来られない生徒をMeetでつなぐところから始めてください。その授業を音声として残せば、参加できなかった生徒にも、学び直す資料を届けることができます。</p>
+      </div>
+    </section>
+
+    <!-- ===== 個人情報の取扱い ===== -->
+    <section id="privacy" class="mb-16">
+      <p class="badge inline-block text-xs font-bold text-blue-600 bg-white border border-gray-200 px-5 py-2 rounded-full mb-6 uppercase">Privacy</p>
+      <h2 class="text-2xl font-extrabold mb-6 tracking-tight">個人情報の取扱い</h2>
+      <div class="caution-card">
+        <span class="material-symbols-outlined" aria-hidden="true">warning</span>
+        <p>録音した授業音声や生成した授業記録には、生徒の氏名や発言内容が含まれます。Geminiへアップロードする際は、県域教育アカウントの利用範囲・保存先を確認し、不要になった録音データは速やかに削除してください。生成された授業記録は、必ず教師が内容を確認したうえで共有してください。</p>
+      </div>
+    </section>
+
+    <div class="flex flex-wrap justify-center items-center gap-4 border-t border-gray-100 pt-8 pb-4 text-sm">
+      <a href="#top" class="text-gray-500 hover:text-ink">&uarr; ページトップへ戻る</a>
+    </div>
+
+  </main>
+
+  <footer class="text-center text-xs text-gray-400 py-10">
+    &copy; 2026 鹿児島県立開陽高等学校 定時制課程「学びの保障」研修会. Presented by 和田倫周(Michi Wada).
+  </footer>
+
+  <script>
+    function initInteractions() {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // ---- スプラッシュ演出 ----
+      const splash = document.getElementById('splash');
+      if (splash) {
+        if (prefersReducedMotion) {
+          splash.remove();
+        } else {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => splash.classList.add('show'));
+          });
+          setTimeout(() => splash.classList.add('hide'), 1100);
+          setTimeout(() => splash.remove(), 1650);
+        }
+      }
+
+      // ---- ドロワーメニュー ----
+      const menuBtn = document.getElementById('menuBtn');
+      const closeBtn = document.getElementById('closeBtn');
+      const drawer = document.getElementById('drawer');
+      const overlay = document.getElementById('overlay');
+      if (menuBtn && drawer && overlay) {
+        const openDrawer = () => {
+          drawer.classList.remove('translate-x-full');
+          overlay.classList.remove('hidden');
+          menuBtn.setAttribute('aria-expanded', 'true');
+        };
+        const closeDrawer = () => {
+          drawer.classList.add('translate-x-full');
+          overlay.classList.add('hidden');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        };
+        menuBtn.addEventListener('click', openDrawer);
+        if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+        overlay.addEventListener('click', closeDrawer);
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeDrawer();
+        });
+        drawer.querySelectorAll('a[href]').forEach((link) => {
+          link.addEventListener('click', closeDrawer);
+        });
+      }
+
+      // ---- ボタンの「タップで浮き上がる」エフェクト ----
+      document.querySelectorAll('.btn-tap').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          btn.classList.add('lift');
+          setTimeout(() => btn.classList.remove('lift'), 260);
+        });
+        btn.addEventListener('touchstart', () => {
+          btn.classList.add('lift');
+        }, { passive: true });
+        btn.addEventListener('touchend', () => {
+          setTimeout(() => btn.classList.remove('lift'), 260);
+        });
+      });
+
+      // ---- ページ内スムーススクロール ----
+      document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener('click', (e) => {
+          const targetId = link.getAttribute('href').slice(1);
+          if (!targetId) return;
+          const target = document.getElementById(targetId);
+          if (!target) return;
+          e.preventDefault();
+          target.scrollIntoView({
+            behavior: prefersReducedMotion ? 'auto' : 'smooth',
+            block: 'start'
+          });
+          target.setAttribute('tabindex', '-1');
+          target.focus({ preventScroll: true });
+        });
+      });
+
+      // ---- プロンプトのコピー機能 ----
+      document.querySelectorAll('.copy-btn').forEach((btn) => {
+        const targetSel = btn.getAttribute('data-copy-target');
+        const source = targetSel ? document.querySelector(targetSel) : null;
+        if (!source) return;
+
+        const defaultLabel = btn.querySelector('.copy-label');
+        const liveRegion = document.getElementById('copy-announcer');
+
+        btn.addEventListener('click', () => {
+          const text = source.innerText || source.textContent || '';
+
+          const onSuccess = () => {
+            btn.classList.add('copied');
+            if (defaultLabel) defaultLabel.textContent = 'コピーしました';
+            if (liveRegion) liveRegion.textContent = 'プロンプトをコピーしました';
+            setTimeout(() => {
+              btn.classList.remove('copied');
+              if (defaultLabel) defaultLabel.textContent = 'コピー';
+            }, 2000);
+          };
+
+          const fallbackCopy = () => {
+            try {
+              const textarea = document.createElement('textarea');
+              textarea.value = text;
+              textarea.setAttribute('readonly', '');
+              textarea.style.position = 'absolute';
+              textarea.style.left = '-9999px';
+              document.body.appendChild(textarea);
+              textarea.select();
+              document.execCommand('copy');
+              document.body.removeChild(textarea);
+              onSuccess();
+            } catch (err) {
+              if (liveRegion) liveRegion.textContent = 'コピーに失敗しました。テキストを選択して手動でコピーしてください。';
+            }
+          };
+
+          if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(onSuccess).catch(fallbackCopy);
+          } else {
+            fallbackCopy();
+          }
+        });
+      });
+
+      // ---- アコーディオン ----
+      document.querySelectorAll('.accordion-trigger').forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          const panelId = trigger.getAttribute('aria-controls');
+          const panel = document.getElementById(panelId);
+          const expanded = trigger.getAttribute('aria-expanded') === 'true';
+          trigger.setAttribute('aria-expanded', String(!expanded));
+          if (panel) panel.classList.toggle('open', !expanded);
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initInteractions);
+  </script>
+</body>
+</html>
