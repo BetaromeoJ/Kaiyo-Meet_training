@@ -145,15 +145,6 @@
   .resource-card .material-symbols-outlined { font-size: 28px; color: #4f6df5; margin-bottom: 0.75rem; }
   .resource-card h3 { font-weight: 800; margin-bottom: 0.4rem; }
   .resource-card p { font-size: 0.85rem; color: #6b7280; margin-bottom: 1rem; line-height: 1.6; }
-  .sched-table { width: 100%; border-collapse: collapse; }
-  .sched-table th, .sched-table td { text-align: left; padding: 0.9rem 1rem; font-size: 0.9rem; }
-  .sched-table thead th {
-    background: #f7f8fc; color: #6b7280; font-weight: 700; font-size: 0.75rem;
-    letter-spacing: 0.05em; text-transform: uppercase;
-  }
-  .sched-table tbody tr { border-top: 1px solid #ececf0; }
-  .sched-table tbody tr:hover { background: #f8f9ff; }
-  .sched-time { font-weight: 800; color: #4f6df5; white-space: nowrap; }
   .role-table { width: 100%; border-collapse: collapse; }
   .role-table th, .role-table td { text-align: left; padding: 0.9rem 1rem; font-size: 0.9rem; }
   .role-table thead th {
@@ -163,6 +154,20 @@
   .role-table tbody tr { border-top: 1px solid #ececf0; }
   .role-table tbody tr:hover { background: #f8f9ff; }
   .flow-arrow { display:flex; justify-content:center; color:#c7d2fe; font-size:1.5rem; margin: 0.25rem 0; }
+  .chip-item {
+    background: #ffffff;
+    border: 1.5px solid #d7dcf5;
+    box-shadow: 0 1px 3px rgba(17,17,20,0.05);
+    transition: border-color .2s ease, box-shadow .2s ease,
+                transform .2s cubic-bezier(.34,1.56,.64,1), background .2s ease, color .2s ease;
+  }
+  .chip-item:hover {
+    border-color: #8fa2fb;
+    background: linear-gradient(90deg, #eef2ff 0%, #f3eafe 100%);
+    box-shadow: 0 12px 22px -12px rgba(79,109,245,0.4);
+    transform: translateY(-3px);
+    color: #3346c9;
+  }
   @media print {
     #splash, #menuBtn, #drawer, #overlay, .quicknav, .copy-btn { display: none !important; }
     body { background: #fff; }
@@ -214,9 +219,7 @@
 
     <h3 class="text-xs font-bold text-gray-400 uppercase mb-3">研修プログラム</h3>
     <ul class="mb-8 space-y-2 text-sm">
-      <li><a href="#schedule" class="block py-1">50分スケジュール</a></li>
-      <li><a href="#detail" class="block py-1">各時間帯の内容</a></li>
-      <li><a href="#slides" class="block py-1">スライド構成案</a></li>
+      <li><a href="#schedule" class="block py-1">研修プログラムの流れ</a></li>
       <li><a href="#message" class="block py-1">中心メッセージ</a></li>
     </ul>
   </nav>
@@ -252,7 +255,7 @@
       <a href="#purpose" class="quicknav-btn"><span class="material-symbols-outlined" aria-hidden="true">flag</span>研修の目的</a>
       <a href="#recorder" class="quicknav-btn"><span class="material-symbols-outlined" aria-hidden="true">mic</span>録音の手順</a>
       <a href="#gemini" class="quicknav-btn"><span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span>Geminiで整理</a>
-      <a href="#schedule" class="quicknav-btn"><span class="material-symbols-outlined" aria-hidden="true">schedule</span>50分の流れ</a>
+      <a href="#schedule" class="quicknav-btn"><span class="material-symbols-outlined" aria-hidden="true">schedule</span>研修の流れ</a>
     </nav>
 
     <!-- ===== 3. 研修の目的 ===== -->
@@ -326,25 +329,25 @@
         <div>
           <h3 class="font-bold text-lg mb-4">教師側</h3>
           <ul class="grid grid-cols-2 gap-3">
-            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">学校支給のSurface</li>
-            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Google Meet</li>
-            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Google Classroom</li>
-            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Windowsサウンドレコーダー</li>
-            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">プロジェクター</li>
-            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">タブレット</li>
-            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">三脚</li>
-            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">ピンマイク</li>
-            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">デジタル教材</li>
-            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Gemini</li>
-            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600 col-span-2">Googleドキュメント</li>
+            <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">学校支給のSurface</li>
+            <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">Google Meet</li>
+            <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">Google Classroom</li>
+            <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">Windowsサウンドレコーダー</li>
+            <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">プロジェクター</li>
+            <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">タブレット</li>
+            <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">三脚</li>
+            <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">ピンマイク</li>
+            <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">デジタル教材</li>
+            <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">Gemini</li>
+            <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700 col-span-2">Googleドキュメント</li>
           </ul>
         </div>
         <div>
           <h3 class="font-bold text-lg mb-4">受講者側</h3>
           <ul class="grid grid-cols-1 gap-3">
-            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">学校支給のSurface</li>
-            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">イヤホンまたはヘッドセット</li>
-            <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">県域教育アカウント</li>
+            <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">学校支給のSurface</li>
+            <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">イヤホンまたはヘッドセット</li>
+            <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">県域教育アカウント</li>
           </ul>
         </div>
       </div>
@@ -393,12 +396,12 @@
 
       <h3 class="font-bold text-lg mb-4">使用する教材の例</h3>
       <ul class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Googleスライド</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Canvaプレゼンテーション</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">PDF</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Googleドキュメント</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">Webサイト</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-600">デジタル教科書</li>
+        <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">Googleスライド</li>
+        <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">Canvaプレゼンテーション</li>
+        <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">PDF</li>
+        <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">Googleドキュメント</li>
+        <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">Webサイト</li>
+        <li class="chip-item rounded-xl px-4 py-3 text-center text-sm font-bold text-gray-700">デジタル教科書</li>
       </ul>
       <p class="text-gray-500 text-sm">※ Canvaのスマートフォンリモコン機能は補助的な情報とし、今回は研修の中心には置きません。</p>
     </section>
@@ -538,39 +541,17 @@
       </div>
     </section>
 
-    <!-- ===== 14. 50分の研修スケジュール ===== -->
+    <!-- ===== 14. 研修プログラムの流れ ===== -->
     <section id="schedule" class="mb-16">
-      <p class="badge inline-block text-xs font-bold text-blue-600 bg-white border border-gray-200 px-5 py-2 rounded-full mb-6 uppercase">Schedule</p>
-      <h2 class="text-3xl md:text-4xl font-extrabold mb-8 tracking-tight">50分の研修スケジュール</h2>
+      <p class="badge inline-block text-xs font-bold text-blue-600 bg-white border border-gray-200 px-5 py-2 rounded-full mb-6 uppercase">Program Flow</p>
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight">研修プログラムの流れ</h2>
+      <p class="text-gray-500 mb-8">全9ステップで、趣旨説明から模擬授業、録音・Gemini整理、共有、まとめまでを一続きに体験します。</p>
 
-      <div class="card-hover bg-white border border-gray-100 rounded-2xl overflow-hidden">
-        <table class="sched-table">
-          <thead>
-            <tr><th>時間</th><th>研修内容</th></tr>
-          </thead>
-          <tbody>
-            <tr><td class="sched-time">0〜5分</td><td class="text-gray-700">「学びの保障」の趣旨と本日のゴール</td></tr>
-            <tr><td class="sched-time">5〜13分</td><td class="text-gray-700">Google Meetの基本操作</td></tr>
-            <tr><td class="sched-time">13〜18分</td><td class="text-gray-700">ハイブリッド授業の機材と配置</td></tr>
-            <tr><td class="sched-time">18〜23分</td><td class="text-gray-700">サウンドレコーダーの起動・録音開始</td></tr>
-            <tr><td class="sched-time">23〜37分</td><td class="text-gray-700">模擬ハイブリッド授業</td></tr>
-            <tr><td class="sched-time">37〜40分</td><td class="text-gray-700">Meet終了・録音停止・音声確認</td></tr>
-            <tr><td class="sched-time">40〜47分</td><td class="text-gray-700">音声をGeminiへアップロードし、授業記録を生成</td></tr>
-            <tr><td class="sched-time">47〜49分</td><td class="text-gray-700">Googleドキュメント・Classroomでの共有例</td></tr>
-            <tr><td class="sched-time">49〜50分</td><td class="text-gray-700">研修全体のまとめ</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ===== 15. 各時間帯の具体的な内容 ===== -->
-    <section id="detail" class="mb-16">
-      <h2 class="text-blue-600 text-xl font-bold mb-6">各時間帯の具体的な内容</h2>
       <div class="accordion">
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="true" aria-controls="d1">
-            <span>0〜5分：「学びの保障」と研修目的</span>
+            <span>STEP 1：「学びの保障」の趣旨と本日のゴール</span>
             <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
           </button>
           <div id="d1" class="accordion-panel open">
@@ -581,7 +562,7 @@
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="d2">
-            <span>5〜13分：Google Meet基本操作</span>
+            <span>STEP 2：Google Meet基本操作</span>
             <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
           </button>
           <div id="d2" class="accordion-panel">
@@ -593,7 +574,7 @@
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="d3">
-            <span>13〜18分：機材と配置の紹介</span>
+            <span>STEP 3：機材と配置の紹介</span>
             <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
           </button>
           <div id="d3" class="accordion-panel">
@@ -604,7 +585,7 @@
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="d4">
-            <span>18〜23分：サウンドレコーダーの操作</span>
+            <span>STEP 4：サウンドレコーダーの操作</span>
             <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
           </button>
           <div id="d4" class="accordion-panel">
@@ -616,7 +597,7 @@
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="d5">
-            <span>23〜37分：模擬ハイブリッド授業</span>
+            <span>STEP 5：模擬ハイブリッド授業</span>
             <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
           </button>
           <div id="d5" class="accordion-panel">
@@ -628,7 +609,7 @@
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="d6">
-            <span>37〜40分：録音停止と音声確認</span>
+            <span>STEP 6：録音停止と音声確認</span>
             <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
           </button>
           <div id="d6" class="accordion-panel">
@@ -638,7 +619,7 @@
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="d7">
-            <span>40〜47分：Geminiで授業記録を作成</span>
+            <span>STEP 7：Geminiで授業記録を作成</span>
             <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
           </button>
           <div id="d7" class="accordion-panel">
@@ -649,7 +630,7 @@
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="d8">
-            <span>47〜49分：GoogleドキュメントとClassroomへの共有</span>
+            <span>STEP 8：GoogleドキュメントとClassroomへの共有</span>
             <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
           </button>
           <div id="d8" class="accordion-panel">
@@ -660,7 +641,7 @@
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="d9">
-            <span>49〜50分：研修のまとめ</span>
+            <span>STEP 9：研修のまとめ</span>
             <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
           </button>
           <div id="d9" class="accordion-panel">
@@ -673,36 +654,7 @@
       </div>
     </section>
 
-    <!-- ===== 16. スライド構成案 ===== -->
-    <section id="slides" class="mb-16">
-      <h2 class="text-blue-600 text-xl font-bold mb-2">スライド構成案</h2>
-      <p class="text-gray-500 text-sm mb-6">50分研修では、20枚前後が適切です。</p>
-      <ol class="grid grid-cols-1 sm:grid-cols-2 gap-3 list-none">
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">01</span>表紙</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">02</span>今日の研修テーマ</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">03</span>「学びの保障」とは</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">04</span>今日のゴール</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">05</span>学びの保障の全体像</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">06</span>Meetでできること</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">07</span>ClassroomからMeetへ参加</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">08</span>Meetの基本操作</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">09</span>画面共有</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">10</span>ハイブリッド授業の構成</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">11</span>使用機材</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">12</span>機材配置</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">13</span>サウンドレコーダーの役割</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">14</span>授業開始前の手順</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">15</span>模擬授業の流れ</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">16</span>録音停止と保存</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">17</span>Geminiへの音声アップロード</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">18</span>授業記録生成プロンプト</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">19</span>Googleドキュメントへの保存</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">20</span>Classroomでの共有</li>
-        <li class="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-gray-600 flex gap-3"><span class="text-blue-400">21</span>研修のまとめ</li>
-      </ol>
-    </section>
-
-    <!-- ===== 17. 中心メッセージ ===== -->
+    <!-- ===== 15. 中心メッセージ ===== -->
     <section id="message" class="mb-16">
       <p class="badge inline-block text-xs font-bold text-blue-600 bg-white border border-gray-200 px-5 py-2 rounded-full mb-6 uppercase">Core Message</p>
       <h2 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">今回の研修で伝える中心メッセージ</h2>
