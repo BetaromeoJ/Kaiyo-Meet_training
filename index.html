@@ -12,6 +12,13 @@
 <body>
 
   <!-- ============================================================
+       スプラッシュ演出(リロード時に黒幕が下から上へ抜けていく)
+       ============================================================ -->
+  <div id="splash" class="splash-overlay">
+    <div class="splash-text">開陽定時 ICT研修マニュアル<span class="splash-sub">GOOGLE CLASSROOM・GOOGLE MEET</span></div>
+  </div>
+
+  <!-- ============================================================
        共通UI: 固定ヘッダー
        ============================================================ -->
   <header class="site-header">
@@ -149,12 +156,11 @@
             </div>
             <p class="item-desc">授業のお知らせ、配布資料、課題の提出などをひとつの画面にまとめられるサービスです。生徒は自分のアカウントでログインし、担当する授業ごとの画面(クラス)に入って確認します。</p>
             <div class="screenshot-placeholder" data-caption="Classroom トップ画面(クラス一覧)">
+              <img src="images/classroom-overview.png" alt="Classroom トップ画面(クラス一覧)">
               <span class="material-symbols-outlined" aria-hidden="true">image</span>
               <span class="ss-label">ここへスクリーンショットを配置してください</span>
               <span class="ss-file">images/classroom-overview.png</span>
             </div>
-            <!-- 差し替え方法: 上のdivの中に <img src="images/classroom-overview.png" alt="Classroom トップ画面"> を追加すると、
-                 クリック時のモーダル表示にも自動的に反映されます。 -->
           </div>
 
           <!-- 2-2. 参加方法 -->
@@ -163,8 +169,9 @@
               <span class="item-card-num">02</span>
               <h4>参加方法</h4>
             </div>
-            <p class="item-desc">クラスコード(教師が用意する英数字のコード)を入力して、担当授業のクラスに参加します。</p>
+            <p class="item-desc">クラスコード(教師が用意する英数字のコード)を入力して、担当授業のクラスに参加します。今回は、県域教育アカウントにメールで招待状を送信しています。メールから参加してください。</p>
             <div class="screenshot-placeholder" data-caption="クラスコード入力画面">
+              <img src="images/classroom-join.png" alt="クラスコード入力画面">
               <span class="material-symbols-outlined" aria-hidden="true">image</span>
               <span class="ss-label">ここへスクリーンショットを配置してください</span>
               <span class="ss-file">images/classroom-join.png</span>
@@ -183,8 +190,9 @@
               <span class="item-card-num">03</span>
               <h4>ストリーム</h4>
             </div>
-            <p class="item-desc">クラスに入って最初に表示される画面です。教師からのお知らせや連絡事項が、新しい順に並びます。いわば「掲示板」です。</p>
+            <p class="item-desc">クラスに入って最初に表示される画面です。教師からのお知らせや連絡事項が、新しい順に並びます。いわば「掲示板」です。ここに、Meetのリンク、クラスコード、期限間近が常に表示されます。</p>
             <div class="screenshot-placeholder" data-caption="ストリーム画面(お知らせ一覧)">
+              <img src="images/classroom-stream.png" alt="ストリーム画面(お知らせ一覧)">
               <span class="material-symbols-outlined" aria-hidden="true">image</span>
               <span class="ss-label">ここへスクリーンショットを配置してください</span>
               <span class="ss-file">images/classroom-stream.png</span>
@@ -197,8 +205,9 @@
               <span class="item-card-num">04</span>
               <h4>授業</h4>
             </div>
-            <p class="item-desc">画面上部の「授業」タブには、配布資料や課題が単元・トピックごとに整理されています。Meetのリンクも、多くの場合ここに置きます。</p>
+            <p class="item-desc">画面上部の「授業」タブには、配布資料や課題が単元・トピックごとに整理されています。</p>
             <div class="screenshot-placeholder" data-caption="授業タブ(資料・課題一覧)">
+              <img src="images/classroom-classwork.png" alt="授業タブ(資料・課題一覧)">
               <span class="material-symbols-outlined" aria-hidden="true">image</span>
               <span class="ss-label">ここへスクリーンショットを配置してください</span>
               <span class="ss-file">images/classroom-classwork.png</span>
@@ -213,6 +222,7 @@
             </div>
             <p class="item-desc">「メンバー」タブでは、そのクラスに参加している教師と生徒の一覧を確認できます。生徒がきちんと参加できているかの確認に使います。</p>
             <div class="screenshot-placeholder" data-caption="メンバー画面(参加者一覧)">
+              <img src="images/classroom-people.png" alt="メンバー画面(参加者一覧)">
               <span class="material-symbols-outlined" aria-hidden="true">image</span>
               <span class="ss-label">ここへスクリーンショットを配置してください</span>
               <span class="ss-file">images/classroom-people.png</span>
@@ -307,11 +317,6 @@
               <h4>Meetとは</h4>
             </div>
             <p class="item-desc">ブラウザだけで使えるビデオ通話ツールです。アプリのインストールは不要で、Classroomのリンクから直接開くことができます。</p>
-            <div class="screenshot-placeholder" data-caption="Meet 通話画面の全体像">
-              <span class="material-symbols-outlined" aria-hidden="true">image</span>
-              <span class="ss-label">ここへスクリーンショットを配置してください</span>
-              <span class="ss-file">images/meet-overview.png</span>
-            </div>
           </div>
 
           <!-- 3-2. Meet参加 -->
@@ -322,6 +327,7 @@
             </div>
             <p class="item-desc">ClassroomからMeetのリンクを開くだけで参加できます。会議コードを手入力する必要はありません。</p>
             <div class="screenshot-placeholder" data-caption="Meet参加ボタンの画面">
+              <img src="images/meet-join.png" alt="Meet参加ボタンの画面">
               <span class="material-symbols-outlined" aria-hidden="true">image</span>
               <span class="ss-label">ここへスクリーンショットを配置してください</span>
               <span class="ss-file">images/meet-join.png</span>
@@ -341,6 +347,7 @@
             </div>
             <p class="item-desc">画面下部中央のマイクのアイコンで、オン・オフを切り替えます。斜線が入っているときはオフ(消音)です。</p>
             <div class="screenshot-placeholder" data-caption="マイクのオン・オフアイコン">
+              <img src="images/meet-mic.png" alt="マイクのオン・オフアイコン">
               <span class="material-symbols-outlined" aria-hidden="true">image</span>
               <span class="ss-label">ここへスクリーンショットを配置してください</span>
               <span class="ss-file">images/meet-mic.png</span>
@@ -355,6 +362,7 @@
             </div>
             <p class="item-desc">マイクの隣にあるカメラのアイコンで、映像のオン・オフを切り替えます。</p>
             <div class="screenshot-placeholder" data-caption="カメラのオン・オフアイコン">
+              <img src="images/meet-camera.png" alt="カメラのオン・オフアイコン">
               <span class="material-symbols-outlined" aria-hidden="true">image</span>
               <span class="ss-label">ここへスクリーンショットを配置してください</span>
               <span class="ss-file">images/meet-camera.png</span>
@@ -369,6 +377,7 @@
             </div>
             <p class="item-desc">画面右上の吹き出しのアイコンから、文字でメッセージを送れます。声を出しにくい質問はチャットが便利です。</p>
             <div class="screenshot-placeholder" data-caption="チャットパネルの画面">
+              <img src="images/meet-chat.png" alt="チャットパネルの画面">
               <span class="material-symbols-outlined" aria-hidden="true">image</span>
               <span class="ss-label">ここへスクリーンショットを配置してください</span>
               <span class="ss-file">images/meet-chat.png</span>
@@ -383,9 +392,10 @@
             </div>
             <p class="item-desc">画面下部の手のひらのアイコンを押すと「挙手」の合図が教師の画面に表示されます。発言したいときに使います。</p>
             <div class="screenshot-placeholder" data-caption="挙手アイコンの画面">
+              <img src="images/meet-raise.png" alt="挙手アイコンの画面">
               <span class="material-symbols-outlined" aria-hidden="true">image</span>
               <span class="ss-label">ここへスクリーンショットを配置してください</span>
-              <span class="ss-file">images/meet-raise-hand.png</span>
+              <span class="ss-file">images/meet-raise.png</span>
             </div>
           </div>
 
@@ -397,6 +407,7 @@
             </div>
             <p class="item-desc">赤い受話器のアイコンを押すと通話から退出します。授業終了の合図を教師が出してから押しましょう。</p>
             <div class="screenshot-placeholder" data-caption="退出ボタンの画面">
+              <img src="images/meet-leave.png" alt="退出ボタンの画面">
               <span class="material-symbols-outlined" aria-hidden="true">image</span>
               <span class="ss-label">ここへスクリーンショットを配置してください</span>
               <span class="ss-file">images/meet-leave.png</span>

@@ -3,6 +3,7 @@
    script.js
 
    構成:
+     0. initSplash()           … リロード時、黒幕が下から上へ抜けていく演出
      1. initProgressBar()     … スクロール量に応じて進捗バーを更新
      2. initTOC()              … 右側目次のハイライト・現在位置表示・
                                    モバイル用ドロワーの開閉
@@ -26,6 +27,25 @@
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const STORAGE_PREFIX = 'kaiyo-ict-manual:';
+
+  /* ------------------------------------------------------------
+     0. スプラッシュ演出(黒幕が下から上へ抜けていく)
+     ------------------------------------------------------------ */
+  function initSplash() {
+    const splash = document.getElementById('splash');
+    if (!splash) return;
+
+    if (prefersReducedMotion) {
+      splash.remove();
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => splash.classList.add('show'));
+    });
+    setTimeout(() => splash.classList.add('hide'), 1100);
+    setTimeout(() => splash.remove(), 1650);
+  }
 
   /* ------------------------------------------------------------
      1. 進捗バー
@@ -301,6 +321,7 @@
      初期化
      ------------------------------------------------------------ */
   document.addEventListener('DOMContentLoaded', () => {
+    initSplash();
     initProgressBar();
     initTOC();
     initBackToTop();
