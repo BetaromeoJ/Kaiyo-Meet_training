@@ -197,11 +197,12 @@ input:focus-visible {
 
 .site-header .current-section {
   flex: 1;
-  text-align: center;
+  text-align: left;
   font-size: 14px;
   font-weight: 700;
   color: var(--text-secondary);
   padding: 0 12px;
+  margin-left: 8px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
